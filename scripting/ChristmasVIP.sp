@@ -35,6 +35,8 @@ public void OnPluginStart()
 
 public void OnConfigsExecuted() 
 {
+	int lower_bound = GetConVarInt(g_cTimeLowerBound),
+		higher_bound = GetConVarInt(g_cTimeHigherBound);
 	g_iFlagCount = 0;
 	char szFlags[256],
 		szSplinters[20][6];
@@ -51,6 +53,12 @@ public void OnConfigsExecuted()
 			break;
 		g_iFlags[g_iFlagCount++] = StringToInt(szSplinters[i]);
 	}
+	if(lower_bound>higher_bound)
+	{
+		PrintToServer("[ChristmasVIP] ERROR, your lower_bound is higher than your higher_bound, please fix it in the config. Plugin has been unloaded.");
+		UnloadMyself();
+	}
+
 }
 
 
@@ -59,10 +67,17 @@ public void OnClientPostAdminCheck(int client)
 	int time = GetTime(),
 		lower_bound = GetConVarInt(g_cTimeLowerBound),
 		higher_bound = GetConVarInt(g_cTimeHigherBound);
-		
 	if(time>lower_bound && time<higher_bound)
 	{
-	for (int i = 0; i < g_iFlagCount; i++)
-		SetUserFlagBits(client, GetUserFlagBits(client) | (1 << g_iFlags[i]));
+		for (int i = 0; i < g_iFlagCount; i++)
+			SetUserFlagBits(client, GetUserFlagBits(client) | (1 << g_iFlags[i]));
 	}
 }
+
+
+stock void UnloadMyself() 
+{
+	char filename[256];
+	GetPluginFilename(INVALID_HANDLE, filename, sizeof(filename));
+	ServerCommand("sm plugins unload %s", filename);
+} 
