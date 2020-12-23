@@ -16,12 +16,8 @@
 3. The config file will be automatically generated in cfg/sourcemod/
 
 ## Configuration ##
-- You can modify the phrases in addons/sourcemod/translations/ChristmasVIP.phrases.txt.
 - Once the plugin has been loaded, you can modify the cvars in cfg/sourcemod/ChristmasVIP.cfg.
-
-
-## Usage ##
-
+- You have to set a lower bound and a higher bound to define when to start granting VIP and when to stop it. NOTE:Time has to be in UNIX format, use [](https://www.unixtimestamp.com) to convert to this format.
 
 ## Contacts ##
 If you have questions, you can add me on Discord: Sarrus#9090
