@@ -4,5 +4,6 @@
 	{
 		"en"        "{green}[VIP] {gold}You have been given the VIP status for christmas!"
 		"fr"        "{green}[VIP] {gold}Vous avez reçu le status VIP car c'est noël!"
+		"ru"        "{green}[VIP] {gold}Вам предоставили VIP-статус на Рождество!"
 	}
 }
